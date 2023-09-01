@@ -1,9 +1,9 @@
-import { UserButton } from "@clerk/nextjs";
+import SearchInput from "@/components/SearchInput";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div>
-      home
+    <div className="h-full p-4 space-y-2">
+      <SearchInput />
     </div>
   )
 }
