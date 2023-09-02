@@ -2,16 +2,25 @@ import prismadb from "@/lib/prismadb";
 import CompanionForm from "./components/CompanionForm";
 interface CompanionIdProps {
     params: {
-        companionId: string
+        id: string
     }
 }
 
+
+
 const CompanionPage = async ({ params }: CompanionIdProps) => {
-    const companion = await prismadb.companion.findUnique({
+
+    function isValidObjectId(id: string): boolean {
+        const objectIdPattern = /^[0-9a-fA-F]{24}$/;
+        return objectIdPattern.test(id);
+    }
+
+    const companion = isValidObjectId(params.id) ? await prismadb.companion.findUnique({
         where: {
-            id: params.companionId,
+            id: params.id,
         }
-    });
+    }) : null;
+
 
     const categories = await prismadb.category.findMany();
 

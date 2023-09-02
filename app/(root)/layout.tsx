@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { Toaster } from "@/components/ui/toaster"
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -10,6 +11,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
             <main className="md:pl-20 pt-16 h-full">
                 {children}
+                <Toaster />
             </main>
         </div>
     );
