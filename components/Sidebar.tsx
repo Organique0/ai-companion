@@ -17,7 +17,7 @@ const Sidebar = () => {
         },
         {
             icon: Plus,
-            href: "/new",
+            href: "/companion/new",
             label: "create",
             pro: true,
         },
