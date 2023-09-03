@@ -42,7 +42,6 @@ const SearchInput = ({ data }: SearchInputProps) => {
     const handleSelect = (item: any) => {
         setValue(item.name);
         setOpen(false);
-        console.log(value, item.name);
 
         const query = {
             name: item.name,
