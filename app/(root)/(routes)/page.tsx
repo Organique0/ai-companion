@@ -51,6 +51,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         }
       ],
     }) as unknown as Companion[];  //this is super important to get the correct data type
+
   } else {
     data = await prismadb.companion.findMany({
       where: {
@@ -59,10 +60,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     })
   }
 
+
   const categories = await prismadb.category.findMany();
   return (
     <div className="h-full p-4 space-y-2">
-      <SearchInput />
+      <SearchInput data={data} />
       <Categories data={categories} />
       <Companions data={data} />
     </div>
