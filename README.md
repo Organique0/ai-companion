@@ -1,8 +1,9 @@
-Next 13, React, Stripe, Prisma, MySQL, Tailwind.
-Authentication with Clerk since its so easy to use with Next.js (if you do not have a separate server for user validation already)
+Next 13, React, Stripe, Prisma, Mongodb, Tailwind.
+Authentication with Clerk since its so easy to use with Next.js
 
-Saas ai platform. Create custom ai characters and then have a conversations with them.
-The most challenging part was the real time autocompletion search. 
+Saas ai platform. 
+Create custom ai characters and then have a conversations with them.
+It has a nice autocompletion search and a fast Redis database to store chat history.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 ## Getting Started
