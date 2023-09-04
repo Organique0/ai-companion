@@ -27,8 +27,9 @@ export const ChatMessages = ({ companion, isLoading, messages = [] }: ChatMessag
 
     return (
         <div className="flex-1 overflow-y-auto pr-4">
+            <ChatMessage isLoading={fakeLoading} src={companion.src} role="system" content={`hello, I am ${companion.name}, ${companion.description}`} />
             {messages.map((message) => (
-                <ChatMessage key={message.content} isLoading={fakeLoading} src={message.src} role={message.role} content={message.content} />
+                <ChatMessage key={message.content} isLoading={fakeLoading} src={companion.src} role={message.role} content={message.content} />
             ))}
             {isLoading && (
                 <ChatMessage role="system" src={companion.src} isLoading />
