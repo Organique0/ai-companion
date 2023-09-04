@@ -1,4 +1,4 @@
-Next 13, React, Stripe, Prisma, Mongodb, Tailwind.
+Next 13, React, Stripe, Prisma, Mongodb, Tailwind, Redis, Pinecone, Upstash, Replicate chat Ai
 Authentication with Clerk since its so easy to use with Next.js
 
 Saas ai platform. 
