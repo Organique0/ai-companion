@@ -8,13 +8,22 @@ import { Button } from "./ui/button";
 import { Sparkles } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 import MobileSidebar from "./MobileSidebar";
+import { useEffect, useState } from "react";
 
 const font = Poppins({
     weight: "600",
     subsets: ["latin"],
 })
 
+//the worst part about Next.js is present in this file. 
+//Why do we need to do this at all? Can't Vercel make it work better?
+//Instead, we need to use this useEffect hack everywhere. Otherwise it won't work.
+
 export const Navbar = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, [])
     return (
         <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary h-16">
             <div className="flex items-center">
@@ -31,7 +40,8 @@ export const Navbar = () => {
                     <Sparkles className="h-4 w-4 fill-white ml-2" />
                 </Button>
                 <ModeToggle />
-                <UserButton afterSignOutUrl="/" />
+                {mounted && <UserButton afterSignOutUrl="/" />}
+
             </div>
         </div>
     )

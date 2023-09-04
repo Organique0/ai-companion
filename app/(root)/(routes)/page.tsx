@@ -12,12 +12,15 @@ interface HomePageProps {
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
-  //omg this is the best database query ever.
+  //this is the best database query ever.
   //it allows you to search the database and find all results containing the name of the character within the current category
   //if there is no name in searchParams then returns all results
+  //it looks over complicated but I wanted to make it return the data in the same format as the query from Prismadb
+  //All of this is actually just because Prisma does not support full text search for mongodb database.
+  //so we had to do it manually. My first time acutally writing pure mongodb queries so it took me forever.
+  //dont make fun of it. This is a masterpiece for me.
+  //there are still some issues with the types like always, but I managed to ducktape it together, just so that there are no warnings.
 
-  //TODO: load messages count
-  //there should be messages linked to each character in the database
   var data: Companion[];
   if (searchParams.name) {
     data = await prismadb.companion.aggregateRaw({
