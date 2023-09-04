@@ -5,9 +5,12 @@ import Link from "next/link";
 import { MessagesSquare } from "lucide-react";
 import { Item } from "@radix-ui/react-dropdown-menu";
 
-interface CompanionsProps {
+export interface CompanionsProps {
     data: (Companion & {
-        categoryId: string
+        categoryId: string,
+        _count?: {
+            messages: number,
+        },
     })[];
 }
 
@@ -46,7 +49,7 @@ const Companions = ({ data }: CompanionsProps) => {
                             <div className="flex items-center">
                                 <MessagesSquare className="h-3 w-3 mr-1" />
                                 <p>
-                                    msCount
+                                    {comp._count?.messages}
                                 </p>
                             </div>
                         </CardFooter>

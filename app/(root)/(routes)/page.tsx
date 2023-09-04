@@ -32,13 +32,53 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           },
         },
         {
+          $lookup: {
+            from: "Message",
+            localField: "_id",
+            foreignField: "companionId",
+            as: "messages"
+          }
+        },
+        {
           $addFields: {
-            categoryId: searchParams.categoryId
+            categoryIdString: { $toString: "$categoryId" },
+            idString: { $toString: "$_id" },
+            _count: { messages: { $size: "$messages" } },
+            createdAtString: {
+              $dateToString: {
+                date: '$createdAt',
+                format: '%Y-%m-%dT%H:%M:%S.%LZ'
+              }
+            },
+            updatedAtString: {
+              $dateToString: {
+                date: '$updatedAt',
+                format: '%Y-%m-%dT%H:%M:%S.%LZ'
+              }
+            }
+
           }
         },
         {
           $match: {
-            categoryId: searchParams.categoryId
+            categoryIdString: searchParams.categoryId
+          },
+        },
+        {
+          $project: {
+            id: "$idString",
+            userId: 1,
+            username: 1,
+            src: 1,
+            name: 1,
+            description: 1,
+            instructions: 1,
+            seed: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            categoryId: "$categoryIdString",
+            category: 1,
+            _count: 1
           }
         },
         {
@@ -48,18 +88,27 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         },
         {
           $limit: 50
-        }
+        },
       ],
     }) as unknown as Companion[];  //this is super important to get the correct data type
 
   } else {
     data = await prismadb.companion.findMany({
       where: {
-        categoryId: searchParams.categoryId
+        categoryId: searchParams.categoryId,
+      },
+      orderBy: {
+        createdAt: "desc"
+      },
+      include: {
+        _count: {
+          select: {
+            messages: true
+          }
+        }
       }
     })
   }
-
 
   const categories = await prismadb.category.findMany();
   return (
